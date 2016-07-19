@@ -1,4 +1,4 @@
-package com.emc.spring.content.gs.webdav;
+package spring.content.gs.webdav;
 
 import io.milton.config.HttpManagerBuilder;
 import io.milton.http.HttpManager;

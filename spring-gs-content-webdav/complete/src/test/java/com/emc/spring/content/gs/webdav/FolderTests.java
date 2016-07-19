@@ -18,12 +18,13 @@ import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.emc.spring.content.gs.webdav.Application;
 import com.github.paulcwarren.ginkgo4j.Ginkgo4jSpringRunner;
 import com.github.sardine.Sardine;
 import com.github.sardine.SardineFactory;
 import com.github.sardine.impl.SardineException;
 import com.jayway.restassured.RestAssured;
+
+import spring.content.gs.webdav.Application;
 
 @RunWith(Ginkgo4jSpringRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)

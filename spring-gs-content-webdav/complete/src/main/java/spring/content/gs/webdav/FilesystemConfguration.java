@@ -1,4 +1,4 @@
-package com.emc.spring.content.gs.webdav;
+package spring.content.gs.webdav;
 
 import java.io.File;
 import java.io.IOException;

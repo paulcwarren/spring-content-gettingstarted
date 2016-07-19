@@ -1,4 +1,4 @@
-package com.emc.spring.content.gs.webdav;
+package spring.content.gs.webdav;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

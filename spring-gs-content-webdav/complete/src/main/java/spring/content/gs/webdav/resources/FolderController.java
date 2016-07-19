@@ -1,4 +1,4 @@
-package com.emc.spring.content.gs.webdav.resources;
+package spring.content.gs.webdav.resources;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.mail.event.FolderListener;
+import javax.transaction.Transactional;
 
 import io.milton.annotations.ChildrenOf;
 import io.milton.annotations.Delete;

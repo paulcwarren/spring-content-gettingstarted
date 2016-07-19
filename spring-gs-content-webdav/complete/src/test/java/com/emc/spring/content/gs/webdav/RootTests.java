@@ -22,6 +22,8 @@ import com.github.sardine.Sardine;
 import com.github.sardine.SardineFactory;
 import com.jayway.restassured.RestAssured;
 
+import spring.content.gs.webdav.Application;
+
 @RunWith(Ginkgo4jSpringRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration   

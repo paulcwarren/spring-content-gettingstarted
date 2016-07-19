@@ -1,25 +1,35 @@
-package com.emc.spring.content.gs.webdav.resources;
+package spring.content.gs.webdav.resources;
 
 import java.util.Date;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+@Entity
+@Inheritance
 public class Object {
 	
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 	private String name;
 	private Date created;
 	private Date modified;
-	@DBRef
+	@ManyToOne
+	@JoinColumn(name = "parent_id")
 	private Folder parent;
 
-	public String getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

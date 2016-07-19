@@ -1,4 +1,4 @@
-package com.emc.spring.content.gs.webdav.resources;
+package spring.content.gs.webdav.resources;
 
 import com.emc.spring.content.commons.repository.ContentStore;
 

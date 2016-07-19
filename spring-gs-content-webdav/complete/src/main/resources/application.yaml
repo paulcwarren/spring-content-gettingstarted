@@ -5,6 +5,7 @@ milton:
     - /templates
     - /management
     - /webjars
-
+spring.content:
+  filesystem_root: /tmp/spring-gs-content-webdav
 
 

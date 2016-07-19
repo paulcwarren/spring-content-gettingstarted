@@ -10,12 +10,12 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import com.emc.spring.content.gs.webdav.Application;
-import com.emc.spring.content.gs.webdav.resources.File;
-import com.emc.spring.content.gs.webdav.resources.FileContentRepository;
-import com.emc.spring.content.gs.webdav.resources.FileRepository;
-import com.emc.spring.content.gs.webdav.resources.Folder;
-import com.emc.spring.content.gs.webdav.resources.FolderRepository;
+import spring.content.gs.webdav.Application;
+import spring.content.gs.webdav.resources.File;
+import spring.content.gs.webdav.resources.FileContentRepository;
+import spring.content.gs.webdav.resources.FileRepository;
+import spring.content.gs.webdav.resources.Folder;
+import spring.content.gs.webdav.resources.FolderRepository;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;

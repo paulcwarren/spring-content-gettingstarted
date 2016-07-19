@@ -1,4 +1,4 @@
-package com.emc.spring.content.gs.webdav;
+package spring.content.gs.webdav;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,14 +10,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.emc.spring.content.gs.webdav.resources.FileContentRepository;
-import com.emc.spring.content.gs.webdav.resources.FileRepository;
-import com.emc.spring.content.gs.webdav.resources.FolderRepository;
-
 import io.milton.config.HttpManagerBuilder;
 import io.milton.http.ResourceFactory;
 import io.milton.http.annotated.AnnotationResourceFactory;
 import io.milton.http.http11.DefaultHttp11ResponseHandler;
+import spring.content.gs.webdav.resources.FileContentRepository;
+import spring.content.gs.webdav.resources.FileRepository;
+import spring.content.gs.webdav.resources.FolderRepository;
 
 /**
  *
@@ -70,7 +69,7 @@ public class MiltonConfiguration {
     {
         HttpManagerBuilder builder = new HttpManagerBuilder();
         builder.setResourceFactory(resourceFactory());
-        builder.setControllerPackagesToScan("com.emc.spring.content.gs.webdav.resources");
+        builder.setControllerPackagesToScan("spring.content.gs.webdav.resources");
         builder.setBuffering(DefaultHttp11ResponseHandler.BUFFERING.never);
         builder.setEnableCompression(false);
         builder.getRootContext().put(folders);
