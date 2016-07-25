@@ -10,10 +10,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import edu.emory.mathcs.backport.java.util.Collections;
 import io.milton.config.HttpManagerBuilder;
+import io.milton.ent.config.HttpManagerBuilderEnt;
 import io.milton.http.ResourceFactory;
 import io.milton.http.annotated.AnnotationResourceFactory;
 import io.milton.http.http11.DefaultHttp11ResponseHandler;
+import io.milton.http.http11.auth.BasicAuthHandler;
 import spring.content.gs.webdav.resources.FileContentRepository;
 import spring.content.gs.webdav.resources.FileRepository;
 import spring.content.gs.webdav.resources.FolderRepository;
@@ -67,11 +70,12 @@ public class MiltonConfiguration {
     @Bean
     HttpManagerBuilder httpManagerBuilder()
     {
-        HttpManagerBuilder builder = new HttpManagerBuilder();
+        HttpManagerBuilderEnt builder = new HttpManagerBuilderEnt();
         builder.setResourceFactory(resourceFactory());
         builder.setControllerPackagesToScan("spring.content.gs.webdav.resources");
         builder.setBuffering(DefaultHttp11ResponseHandler.BUFFERING.never);
         builder.setEnableCompression(false);
+        //builder.setAuthenticationHandlers(Collections.singletonList(new BasicAuthHandler()));
         builder.getRootContext().put(folders);
         builder.getRootContext().put(files);
         builder.getRootContext().put(contents);

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <param name="Threshold" value="info"/>
+        <param name="Target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ABSOLUTE} [%t] %-5p %c{1} - %m%n"/>
+        </layout>
+    </appender>
+
+	<logger name="org.hibernate">
+	    <level value="ALL" />
+	    <appender-ref ref="FILE"/>
+	</logger>
+
+    
+    <!-- Log all SQL DML statements as they are executed -->
+	<Logger name="org.hibernate.SQL" level="info" />
+	<!-- Log all JDBC parameters -->
+	<Logger name="org.hibernate.type" level="info" />
+	<!-- Log all SQL DDL statements as they are executed -->
+	<Logger name="org.hibernate.tool.hbm2ddl" level="info" />
+	<!-- Log the state of all entities (max 20 entities) associated with the session at flush time -->
+	<Logger name="org.hibernate.pretty" level="info" />
+	<!-- Log all second-level cache activity -->
+	<Logger name="org.hibernate.cache" level="info" />
+	<!-- Log transaction related activity -->
+	<Logger name="org.hibernate.transaction" level="info" />
+	<!-- Log all JDBC resource acquisition -->
+	<Logger name="org.hibernate.jdbc" level="info" />
+	<!-- Log HQL and SQL ASTs during query parsing -->
+	<Logger name="org.hibernate.hql.ast.AST" level="info" />
+	<!-- Log all JAAS authorization requests -->
+	<Logger name="org.hibernate.secure" level="info" />
+	<!-- Log everything (a lot of information, but very useful for troubleshooting) -->
+	<Logger name="org.hibernate" level="info" />
+
+    <root>
+        <priority value ="info" />
+        <appender-ref ref="console" />
+    </root>
+    
+</log4j:configuration>

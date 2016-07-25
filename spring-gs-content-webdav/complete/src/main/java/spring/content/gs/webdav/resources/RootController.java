@@ -1,7 +1,7 @@
 package spring.content.gs.webdav.resources;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,7 +19,6 @@ import io.milton.annotations.Move;
 import io.milton.annotations.PutChild;
 import io.milton.annotations.ResourceController;
 import io.milton.annotations.Root;
-import io.milton.http.Range;
 import io.milton.http.exceptions.BadRequestException;
 
 @ResourceController
@@ -39,6 +38,10 @@ public class RootController  {
     @Root
     public RootController getRoot() {
         return this;
+    }
+    
+    public Long getId() {
+    	return Long.MAX_VALUE;
     }
     
     public String getName() {
@@ -69,30 +72,32 @@ public class RootController  {
     }
     
     @PutChild
-    public File createFile(RootController root, String newName, InputStream content) throws BadRequestException {
+    public File createFile(RootController root, String newName, byte[] body) throws BadRequestException {
     	File newFile = new File();
     	newFile.setCreated(new Date());
     	newFile.setModified(new Date());
     	newFile.setName(newName);
     	newFile = files.save(newFile);
     	
-    	contents.setContent(newFile, content);
+    	contents.setContent(newFile, new ByteArrayInputStream(body));
     	newFile = files.save(newFile);
     	
 		return newFile;
     }
     
+    @PutChild
+    public File createFile(File file, byte[] body) throws BadRequestException {
+    	contents.setContent(file, new ByteArrayInputStream(body));
+    	return files.save(file);
+    }
+    
     @Get
-    public void get(File file, OutputStream out, Range range) {
-    	if (range == null) {
-    		try {
-				IOUtils.copy(contents.getContent(file), out);
-			} catch (IOException ioe) {
-				log.error(String.format("Unexpected error streaming content for file %s", file.getName()), ioe);
-			}
-    	} else {
-    		throw new UnsupportedOperationException("Byte ranges not supported");
-    	}
+    public void get(File file, OutputStream out) {
+		try {
+			IOUtils.copy(contents.getContent(file), out);
+		} catch (IOException ioe) {
+			log.error(String.format("Unexpected error streaming content for file %s", file.getName()), ioe);
+		}
     }
     
     @Move

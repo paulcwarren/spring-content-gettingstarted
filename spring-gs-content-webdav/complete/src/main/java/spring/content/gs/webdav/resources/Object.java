@@ -17,7 +17,7 @@ public class Object {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	private String name;
 	private Date created;
 	private Date modified;
@@ -25,11 +25,11 @@ public class Object {
 	@JoinColumn(name = "parent_id")
 	private Folder parent;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

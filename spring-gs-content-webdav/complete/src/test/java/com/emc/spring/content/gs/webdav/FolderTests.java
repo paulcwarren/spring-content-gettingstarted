@@ -5,18 +5,22 @@ import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.BeforeEach;
 import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.Context;
 import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.Describe;
 import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.It;
+import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.FIt;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.http.client.utils.URIUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.web.util.UriUtils;
 
 import com.github.paulcwarren.ginkgo4j.Ginkgo4jSpringRunner;
 import com.github.sardine.Sardine;
@@ -43,6 +47,18 @@ public class FolderTests {
     	        RestAssured.port = port;
 				sardine = SardineFactory.begin("user", "password");
     		});
+    		It("should be able to create a folder with spaces in the name", () -> {
+				sardine.createDirectory(getUrl(String.format("/a folder with spaces in it %s", id)));
+				sardine.delete(getUrl(String.format("/a folder with spaces in it %s", id)));
+    		});
+    		It("should be able to create a folder with spaces and other special chatacters in the name", () -> {
+				sardine.createDirectory(getUrl(String.format("/(a folder with special characters in it %s)", id)));
+				sardine.delete(getUrl(String.format("/(a folder with special characters in it %s)", id)));
+    		});
+//    		It("should be able to create a lock and unlock a file", () -> {
+//				String token = sardine.lock(getUrl(String.format("/document%s", id, id)));
+//				sardine.unlock(getUrl(String.format("/document%s", id, id)), token);
+//    		});
     		Context("given a root folder", () -> {
     			BeforeEach(() -> {
     				sardine.createDirectory(getUrl(String.format("/root%s", id)));
@@ -130,7 +146,7 @@ public class FolderTests {
 	public void contextLoads() {
 	}
 	
-	protected String getUrl(String path) {
-		return "http://localhost:" + port + path;
+	protected String getUrl(String path) throws UnsupportedEncodingException {
+		return "http://localhost:" + port + UriUtils.encodePath(path, "UTF-8");
 	}
 }
