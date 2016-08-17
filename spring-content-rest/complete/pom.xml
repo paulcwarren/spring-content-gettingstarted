@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   
   <groupId>come.emc.spring.content</groupId>
-  <artifactId>spring-gs-content-mongorest</artifactId>
+  <artifactId>spring-content-rest-gettingstarted</artifactId>
   <version>0.1.0</version>
   
   	<parent>
