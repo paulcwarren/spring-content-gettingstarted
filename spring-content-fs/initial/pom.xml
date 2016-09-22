@@ -39,7 +39,7 @@
 		<dependency>
 			<groupId>com.emc.spring.content</groupId>
 			<artifactId>spring-content-fs-boot-starter</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2</version>
 		</dependency>
 	</dependencies>
 

@@ -15,8 +15,8 @@
 	</properties>
 
 	<modules>
-  		<module>./spring-gs-content-mongorest/complete</module>
-  		<module>./spring-gs-content-webdav/complete</module>
+  		<module>./spring-content-fs/complete</module>
+  		<module>./spring-content-rest/complete</module>
   	</modules>
 
 </project>
