@@ -41,6 +41,25 @@
 			<artifactId>spring-content-fs-boot-starter</artifactId>
 			<version>0.0.2</version>
 		</dependency>
+		
+		<!-- Test dependencies -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.restassured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>2.3.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.paulcwarren</groupId>
+			<artifactId>ginkgo4j</artifactId>
+			<version>1.0.3</version>
+			<scope>test</scope>
+		</dependency>	
 	</dependencies>
 
 	<build>
