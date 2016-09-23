@@ -5,12 +5,6 @@
 	<artifactId>spring-gs-content</artifactId>
 	<packaging>pom</packaging>
 
-	<parent>
-		<groupId>com.emc.spring.content</groupId>
-		<artifactId>spring-content</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-	</parent>	
-
 	<properties>
 	</properties>
 
