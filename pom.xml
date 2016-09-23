@@ -3,9 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.github.paulcwarren</groupId>
-	<artifactId>spring-gs-content</artifactId>
-	<verison>0.0.1-SNAPSHOT</verison>
-	
+	<artifactId>gettingstarted-spring-content</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
 	<packaging>pom</packaging>
 
 	<properties>
