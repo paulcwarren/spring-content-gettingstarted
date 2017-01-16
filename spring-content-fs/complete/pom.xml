@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.0.RELEASE</version>
+		<version>1.4.3.RELEASE</version>
 	</parent>
 
 	<properties>
@@ -39,7 +39,11 @@
 		<dependency>
 			<groupId>com.github.paulcwarren</groupId>
 			<artifactId>spring-content-fs-boot-starter</artifactId>
-			<version>0.0.2</version>
+			<version>0.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
 		</dependency>
 		
 		<!-- Test dependencies -->
@@ -59,7 +63,7 @@
 			<artifactId>ginkgo4j</artifactId>
 			<version>1.0.5</version>
 			<scope>test</scope>
-		</dependency>	
+		</dependency>
 	</dependencies>
 
 	<build>
