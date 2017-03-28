@@ -2,5 +2,5 @@ package gettingstarted;
 
 import org.springframework.content.commons.repository.ContentStore;
 
-public interface FileContentRepository extends ContentStore<File, String> {
+public interface FileContentStore extends ContentStore<File, String> {
 }

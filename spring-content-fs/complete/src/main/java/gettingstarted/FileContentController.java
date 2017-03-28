@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileContentController {
 
 	@Autowired private FileRepository filesRepo;
-	@Autowired private FileContentRepository contentsRepo;
+	@Autowired private FileContentStore contentStore;
 	
 	@RequestMapping(value="/files/{fileId}", method = RequestMethod.PUT, headers="content-type!=application/hal+json")
 	public ResponseEntity<?> setContent(@PathVariable("fileId") Long id, @RequestParam("file") MultipartFile file) 
@@ -27,7 +27,7 @@ public class FileContentController {
 		File f = filesRepo.findOne(id);
 		f.setMimeType(file.getContentType());
 		
-		contentsRepo.setContent(f, file.getInputStream());
+		contentStore.setContent(f, file.getInputStream());
 		
 		// save updated content-related info
 		filesRepo.save(f);
@@ -39,7 +39,7 @@ public class FileContentController {
 	public ResponseEntity<?> getContent(@PathVariable("fileId") Long id) {
 
 		File f = filesRepo.findOne(id);
-		InputStreamResource inputStreamResource = new InputStreamResource(contentsRepo.getContent(f));
+		InputStreamResource inputStreamResource = new InputStreamResource(contentStore.getContent(f));
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentLength(f.getContentLength());
 		headers.set("Content-Type", 	f.getMimeType());

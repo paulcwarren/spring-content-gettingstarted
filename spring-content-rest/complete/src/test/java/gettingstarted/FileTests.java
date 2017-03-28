@@ -28,7 +28,7 @@ import com.jayway.restassured.RestAssured;
 public class FileTests {
 
 	@Autowired private FileRepository fileRepo;
-	@Autowired private FileContentRepository fileConentRepo;
+	@Autowired private FileContentStore fileContentStore;
 	
     @Value("${local.server.port}") private int port;
 
@@ -58,12 +58,12 @@ public class FileTests {
         		    	.statusCode(HttpStatus.SC_OK);
                 	    	
         	    	file = fileRepo.findOne(file.getId());
-        	    	assertThat(IOUtils.toString(fileConentRepo.getContent(file)), is("This is plain text content!"));
+        	    	assertThat(IOUtils.toString(fileContentStore.getContent(file)), is("This is plain text content!"));
         		});
         		
         		Context("with existing content", () -> {
         			BeforeEach(() -> {
-        				fileConentRepo.setContent(file, new ByteArrayInputStream("Existing content".getBytes()));
+        				fileContentStore.setContent(file, new ByteArrayInputStream("Existing content".getBytes()));
         				fileRepo.save(file);
         			});
         			
