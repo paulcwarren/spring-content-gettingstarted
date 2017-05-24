@@ -4,6 +4,7 @@ import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.BeforeEach;
 import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.Context;
 import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.Describe;
 import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.It;
+import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.FIt;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -24,7 +25,7 @@ import com.jayway.restassured.RestAssured;
 
 @RunWith(Ginkgo4jSpringRunner.class)
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class FileTests {
+public class GettingStartedTest {
 
 	@Autowired private FileRepository fileRepo;
 	@Autowired private FileContentStore fileContentStore;
@@ -66,7 +67,7 @@ public class FileTests {
         				fileRepo.save(file);
         			});
         			
-        			It("should return the content", () -> {
+        			FIt("should return the content", () -> {
         		    	given()
         		    		.header("accept", "text/plain")
         		    	.when()
