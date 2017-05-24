@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.0.RELEASE</version>
+		<version>1.4.3.RELEASE</version>
 	</parent>
 
 	<properties>
@@ -39,7 +39,7 @@
 		<dependency>
 			<groupId>com.emc.spring.content</groupId>
 			<artifactId>spring-content-fs-boot-starter</artifactId>
-			<version>0.0.2</version>
+			<version>0.0.4</version>
 		</dependency>
 	</dependencies>
 
