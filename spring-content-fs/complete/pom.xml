@@ -39,10 +39,6 @@
 			<artifactId>spring-content-fs-boot-starter</artifactId>
 			<version>${spring-content-version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.solr</groupId>
-			<artifactId>solr-solrj</artifactId>
-		</dependency>
 		
 		<!-- Test dependencies -->
 		<dependency>
