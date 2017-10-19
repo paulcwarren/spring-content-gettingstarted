@@ -35,7 +35,7 @@ public class FileContentController {
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value="/files/{fileId}", method = RequestMethod.GET, headers="accept!=application/hal+json")
+	@RequestMapping(value="/files/{fileId}", method = RequestMethod.GET)
 	public ResponseEntity<?> getContent(@PathVariable("fileId") Long id) {
 
 		File f = filesRepo.findOne(id);
