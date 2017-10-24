@@ -20,7 +20,7 @@ public class FileContentController {
 	@Autowired private FileRepository filesRepo;
 	@Autowired private FileContentStore contentStore;
 	
-	@RequestMapping(value="/files/{fileId}", method = RequestMethod.PUT, headers="content-type!=application/hal+json")
+	@RequestMapping(value="/files/{fileId}", method = RequestMethod.PUT)
 	public ResponseEntity<?> setContent(@PathVariable("fileId") Long id, @RequestParam("file") MultipartFile file) 
 			throws IOException {
 
