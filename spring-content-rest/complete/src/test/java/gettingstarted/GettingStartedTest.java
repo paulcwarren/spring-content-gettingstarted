@@ -67,7 +67,7 @@ public class GettingStartedTest {
         				fileRepo.save(file);
         			});
         			
-        			FIt("should return the content", () -> {
+        			It("should return the content", () -> {
         		    	given()
         		    		.header("accept", "text/plain")
         		    	.when()
