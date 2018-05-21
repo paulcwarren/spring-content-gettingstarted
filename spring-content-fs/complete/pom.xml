@@ -7,14 +7,16 @@
 	<packaging>jar</packaging>
 
  	<parent>
-		<groupId>com.github.paulcwarren</groupId>
-		<artifactId>spring-eg-content</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.10.RELEASE</version>
 	</parent>
  
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
+		<ginkgo-version>1.0.9</ginkgo-version>
+		<spring-content-version>0.0.11</spring-content-version>
 	</properties>
 
 	<dependencies>
