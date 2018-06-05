@@ -9,6 +9,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.ByteArrayInputStream;
+import java.util.Optional;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpStatus;
@@ -49,15 +50,17 @@ public class GettingStartedTest {
         		});
         		
         		It("should be able to associate content with the Entity", () -> {
+        			Long fid = file.getId();
+
         	    	given()
         	    		.multiPart("file", "file", new ByteArrayInputStream("This is plain text content!".getBytes()), "text/plain")
         		    .when()
-        		        .put("/files/" + file.getId())
+        		        .put("/files/" + fid)
         		    .then()
         		    	.statusCode(HttpStatus.SC_OK);
                 	    	
-        	    	file = fileRepo.findOne(file.getId());
-        	    	assertThat(IOUtils.toString(fileContentStore.getContent(file)), is("This is plain text content!"));
+        	    	Optional<File> file = fileRepo.findById(fid);
+        	    	assertThat(IOUtils.toString(fileContentStore.getContent(file.get())), is("This is plain text content!"));
         		});
         		
         		Context("with existing content", () -> {

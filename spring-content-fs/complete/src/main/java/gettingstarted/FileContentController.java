@@ -1,6 +1,7 @@
 package gettingstarted;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -24,25 +25,31 @@ public class FileContentController {
 	public ResponseEntity<?> setContent(@PathVariable("fileId") Long id, @RequestParam("file") MultipartFile file) 
 			throws IOException {
 
-		File f = filesRepo.findOne(id);
-		f.setMimeType(file.getContentType());
-		
-		contentStore.setContent(f, file.getInputStream());
-		
-		// save updated content-related info
-		filesRepo.save(f);
-			
-		return new ResponseEntity<Object>(HttpStatus.OK);
+		Optional<File> f = filesRepo.findById(id);
+		if (f.isPresent()) {
+			f.get().setMimeType(file.getContentType());
+
+			contentStore.setContent(f.get(), file.getInputStream());
+
+			// save updated content-related info
+			filesRepo.save(f.get());
+
+			return new ResponseEntity<Object>(HttpStatus.OK);
+		}
+		return null;
 	}
 
 	@RequestMapping(value="/files/{fileId}", method = RequestMethod.GET)
 	public ResponseEntity<?> getContent(@PathVariable("fileId") Long id) {
 
-		File f = filesRepo.findOne(id);
-		InputStreamResource inputStreamResource = new InputStreamResource(contentStore.getContent(f));
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentLength(f.getContentLength());
-		headers.set("Content-Type", 	f.getMimeType());
-		return new ResponseEntity<Object>(inputStreamResource, headers, HttpStatus.OK);
+		Optional<File> f = filesRepo.findById(id);
+		if (f.isPresent()) {
+			InputStreamResource inputStreamResource = new InputStreamResource(contentStore.getContent(f.get()));
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentLength(f.get().getContentLength());
+			headers.set("Content-Type", f.get().getMimeType());
+			return new ResponseEntity<Object>(inputStreamResource, headers, HttpStatus.OK);
+		}
+		return null;
 	}
 }
