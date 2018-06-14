@@ -1,0 +1,61 @@
+<!doctype html>
+<html ng-app="filesApp">
+  <head>
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	  <script>
+		  function upload() {
+		  		var file = {"name": $('#name')[0].value }
+
+			  $.ajax({
+				type: "POST",
+				contentType: "application/json",
+				url: "/files",
+				data: JSON.stringify(file),
+				dataType: 'json',
+				cache: false,
+				timeout: 600000,
+				success: function (response) {
+					console.log("POST /files OK: ", response);
+
+					var data = new FormData();
+					data.append('file', jQuery('#file')[0].files[0]);
+
+					var contentUrl = response._links.self.href
+					$.ajax({
+						url: contentUrl,
+						data: data,
+						cache: false,
+						contentType: false,
+						processData: false,
+						method: 'POST',
+						type: 'POST', // For jQuery < 1.9
+						success: function(response){
+							console.log("POST " + contentUrl + " OK: ", response);
+
+							$($('#image')[0]).attr('src', contentUrl + "?timestamp=" + new Date().getTime());
+						},
+						error: function (e) {
+							console.log("POST " + contentUrl + " ERROR: ", e);
+						}
+					});
+				},
+				error: function (e) {
+					console.log("POST /files ERROR: ", e);
+				}
+			});
+		  }
+	  </script>
+  </head>
+  <body>
+    <div>
+	    <h1>Upload</h1>
+	    <input type="file" id="file" name="file"/>
+	    <input id="name" name="name" placeholder="Name"/>
+		<button onclick="upload()">Upload</button>
+    </div>
+  	<div>
+		<h1>Last Upload</h1>
+		<img id="image"/>
+	</div>
+  </body>
+</html>
