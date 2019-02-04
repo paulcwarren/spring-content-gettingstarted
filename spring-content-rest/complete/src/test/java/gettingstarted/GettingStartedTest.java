@@ -58,7 +58,7 @@ public class GettingStartedTest {
         		    .when()
         		        .put("/files/" + fid)
         		    .then()
-        		    	.statusCode(HttpStatus.SC_OK);
+        		    	.statusCode(HttpStatus.SC_CREATED);
                 	    	
         	    	Optional<File> file = fileRepo.findById(fid);
         	    	assertThat(IOUtils.toString(fileContentStore.getContent(file.get())), is("This is plain text content!"));
