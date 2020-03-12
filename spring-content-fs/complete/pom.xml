@@ -16,7 +16,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<ginkgo-version>1.0.10</ginkgo-version>
-		<spring-content-version>1.0.0.M6</spring-content-version>
+		<spring-content-version>1.0.0.M7</spring-content-version>
 	</properties>
 
 	<dependencies>
