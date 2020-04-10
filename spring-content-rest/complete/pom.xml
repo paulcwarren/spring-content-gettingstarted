@@ -13,7 +13,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<ginkgo-version>1.0.12</ginkgo-version>
-		<spring-content-version>1.0.0.M9</spring-content-version>
 	</properties>
 
 	<dependencies>
@@ -36,12 +35,12 @@
 		<dependency>
 			<groupId>com.github.paulcwarren</groupId>
 			<artifactId>spring-content-fs-boot-starter</artifactId>
-			<version>${spring-content-version}</version>
+			<version>1.0.0.M9</version>
 		</dependency>
  		<dependency>
 			<groupId>com.github.paulcwarren</groupId>
 			<artifactId>spring-content-rest-boot-starter</artifactId>
-			<version>${spring-content-version}</version>
+			<version>1.0.0.M9</version>
 		</dependency>
 		
 		<!-- Test dependencies -->
