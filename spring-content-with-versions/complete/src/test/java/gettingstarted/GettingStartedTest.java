@@ -16,6 +16,7 @@ import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.*;
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.config.EncoderConfig.encoderConfig;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(Ginkgo4jSpringRunner.class)
@@ -56,7 +57,7 @@ public class GettingStartedTest {
 					given()
 							.config(RestAssured.config()
 									.encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false)))
-							.contentType("application/json")
+							.contentType("application/hal+json")
 							.content("{\"number\":\"1.1\",\"label\":\"some minor changes\"}".getBytes())
 							.put("/files/" + file.getId() + "/version")
 							.then()
@@ -66,6 +67,9 @@ public class GettingStartedTest {
 					assertThat(versionedFile.size(), is(1));
 					assertThat(versionedFile.get(0).getVersion(), is("1.1"));
 					assertThat(versionedFile.get(0).getLabel(), is("some minor changes"));
+					assertThat(versionedFile.get(0).getContentId(), is(file.getContentId()));
+					assertThat(versionedFile.get(0).getContentLength(), is(file.getContentLength()));
+					assertThat(versionedFile.get(0).getMimeType(), is(file.getMimeType()));
 
 					given()
 							.config(RestAssured.config()

@@ -50,5 +50,8 @@ public class File {
 	public File(File f) {
 		this.name = f.getName();
 		this.summary = f.getSummary();
+		this.contentId = f.getContentId();
+		this.contentLength = f.getContentLength();
+		this.mimeType = f.getMimeType();
 	}
 }
