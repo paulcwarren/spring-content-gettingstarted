@@ -46,7 +46,7 @@
         <dependency>
             <groupId>com.github.paulcwarren</groupId>
             <artifactId>spring-content-elasticsearch-boot-starter</artifactId>
-            <version>1.1.0.M1-SNAPSHOT</version>
+            <version>1.1.0.M1</version>
         </dependency>
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
