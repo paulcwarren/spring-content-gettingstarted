@@ -11,6 +11,7 @@
 	<modules>
   		<module>./spring-content-fs/complete</module>
   		<module>./spring-content-rest/complete</module>
+		<module>./spring-content-with-renditions/complete</module>
         <module>./spring-content-with-fulltext/complete</module>
 		<module>./spring-content-with-versions/complete</module>
 	</modules>
