@@ -2,6 +2,10 @@
 .classpath
 .project
 .settings/
+**/.classpath
+**/.project
+**/.factorypath
+**/.settings/org.eclipse.jdt.core.prefs
 
 # Intellij
 .idea/
