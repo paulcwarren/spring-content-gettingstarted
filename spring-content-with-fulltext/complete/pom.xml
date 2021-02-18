@@ -36,17 +36,17 @@
         <dependency>
             <groupId>com.github.paulcwarren</groupId>
             <artifactId>spring-content-fs-boot-starter</artifactId>
-            <version>1.2.0</version>
+            <version>1.2.1</version>
         </dependency>
         <dependency>
             <groupId>com.github.paulcwarren</groupId>
             <artifactId>spring-content-rest-boot-starter</artifactId>
-            <version>1.2.0</version>
+            <version>1.2.1</version>
         </dependency>
         <dependency>
             <groupId>com.github.paulcwarren</groupId>
             <artifactId>spring-content-elasticsearch-boot-starter</artifactId>
-            <version>1.2.0</version>
+            <version>1.2.1</version>
         </dependency>
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
