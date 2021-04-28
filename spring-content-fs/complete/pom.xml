@@ -68,12 +68,6 @@
 			<artifactId>ginkgo4j</artifactId>
 			<version>${ginkgo-version}</version>
 			<scope>test</scope>
-			<exclusions>
-			  <exclusion>
-			     <groupId>commons-io</groupId>
-			     <artifactId>commons-io</artifactId>
-			  </exclusion>
-			</exclusions>
 		</dependency>
 	</dependencies>
 
