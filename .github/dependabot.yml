@@ -1,0 +1,32 @@
+version: 2
+updates:
+- package-ecosystem: maven
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: com.github.paulcwarren:spring-content-cmis
+    versions:
+    - 1.2.2
+  - dependency-name: com.github.paulcwarren:spring-versions-jpa
+    versions:
+    - 1.2.2
+  - dependency-name: org.springframework.boot:spring-boot-starter-parent
+    versions:
+    - 2.4.3
+  - dependency-name: com.github.paulcwarren:spring-content-fs-boot-starter
+    versions:
+    - 1.2.1
+  - dependency-name: com.github.paulcwarren:spring-content-rest-boot-starter
+    versions:
+    - 1.2.1
+  - dependency-name: com.github.paulcwarren:spring-content-renditions-boot-starter
+    versions:
+    - 1.2.1
+  - dependency-name: com.github.paulcwarren:spring-versions-jpa-boot-starter
+    versions:
+    - 1.2.1
+  - dependency-name: com.github.paulcwarren:spring-content-elasticsearch-boot-starter
+    versions:
+    - 1.2.1
