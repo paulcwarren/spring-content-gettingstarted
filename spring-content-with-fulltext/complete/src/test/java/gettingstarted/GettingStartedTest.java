@@ -26,7 +26,7 @@ import com.github.paulcwarren.ginkgo4j.Ginkgo4jSpringRunner;
 import com.jayway.restassured.RestAssured;
 
 @RunWith(Ginkgo4jSpringRunner.class)
-@SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes= {SpringContentApplication.class, TestConfig.class}, webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class GettingStartedTest {
 
 	@Autowired private FileRepository fileRepo;
