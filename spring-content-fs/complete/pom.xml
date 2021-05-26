@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>gettingstarted-spring-content-fs</artifactId>
+	<artifactId>spring-content-with-fs</artifactId>
 	<packaging>jar</packaging>
 
  	<parent>
@@ -38,7 +38,7 @@
 		<dependency>
 			<groupId>com.github.paulcwarren</groupId>
 			<artifactId>spring-content-fs-boot-starter</artifactId>
-			<version>1.2.3</version>
+			<version>1.2.4</version>
 		</dependency>
 
 		<!-- Test dependencies -->
