@@ -1,7 +1,17 @@
 package gettingstarted;
 
-import com.github.paulcwarren.ginkgo4j.Ginkgo4jSpringRunner;
-import com.jayway.restassured.RestAssured;
+import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.BeforeEach;
+import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.Context;
+import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.Describe;
+import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.It;
+import static com.jayway.restassured.RestAssured.given;
+import static com.jayway.restassured.config.EncoderConfig.encoderConfig;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+import java.io.ByteArrayInputStream;
+import java.util.List;
+
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,15 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.io.ByteArrayInputStream;
-import java.util.List;
-
-import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.*;
-import static com.jayway.restassured.RestAssured.given;
-import static com.jayway.restassured.config.EncoderConfig.encoderConfig;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
+import com.github.paulcwarren.ginkgo4j.Ginkgo4jSpringRunner;
+import com.jayway.restassured.RestAssured;
 
 @RunWith(Ginkgo4jSpringRunner.class)
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -25,26 +28,26 @@ public class GettingStartedTest {
 
 	@Autowired private FileRepository fileRepo;
 	@Autowired private FileContentStore fileContentStore;
-	
+
     @Value("${local.server.port}") private int port;
 
     private File file;
-    
+
     {
         Describe("File Tests", () -> {
         	BeforeEach(() -> {
         		RestAssured.port = port;
         	});
-        	
+
         	Context("Given a File Entity", () -> {
         		BeforeEach(() -> {
             		file = new File();
-            		file.setMimeType("text/plain");
+            		file.setContentMimeType("text/plain");
             		file.setSummary("test file summary");
             		file = fileContentStore.setContent(file, new ByteArrayInputStream("Hello Spring Content World!".getBytes()));
 					file = fileRepo.save(file);
         		});
-        		
+
         		It("should be versionable", () -> {
 					given()
 							.config(RestAssured.config()
@@ -69,7 +72,7 @@ public class GettingStartedTest {
 					assertThat(versionedFile.get(0).getLabel(), is("some minor changes"));
 					assertThat(versionedFile.get(0).getContentId(), is(file.getContentId()));
 					assertThat(versionedFile.get(0).getContentLength(), is(file.getContentLength()));
-					assertThat(versionedFile.get(0).getMimeType(), is(file.getMimeType()));
+					assertThat(versionedFile.get(0).getContentMimeType(), is(file.getContentMimeType()));
 
 					given()
 							.config(RestAssured.config()

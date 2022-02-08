@@ -1,17 +1,24 @@
 package gettingstarted;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.content.commons.annotations.ContentId;
-import org.springframework.content.commons.annotations.ContentLength;
-import org.springframework.versions.*;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
+
+import org.springframework.content.commons.annotations.ContentId;
+import org.springframework.content.commons.annotations.ContentLength;
+import org.springframework.versions.AncestorId;
+import org.springframework.versions.AncestorRootId;
+import org.springframework.versions.LockOwner;
+import org.springframework.versions.SuccessorId;
+import org.springframework.versions.VersionLabel;
+import org.springframework.versions.VersionNumber;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -28,7 +35,7 @@ public class File {
 
 	@ContentId private String contentId;
 	@ContentLength private long contentLength;
-	private String mimeType = "text/plain";
+	private String contentMimeType = "text/plain";
 
 	@LockOwner
 	private String lockOwner;
@@ -52,6 +59,6 @@ public class File {
 		this.summary = f.getSummary();
 		this.contentId = f.getContentId();
 		this.contentLength = f.getContentLength();
-		this.mimeType = f.getMimeType();
+		this.contentMimeType = f.getContentMimeType();
 	}
 }
