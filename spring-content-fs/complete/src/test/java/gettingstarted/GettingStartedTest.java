@@ -29,26 +29,26 @@ public class GettingStartedTest {
 
 	@Autowired private FileRepository fileRepo;
 	@Autowired private FileContentStore fileContentStore;
-	
+
     @Value("${local.server.port}") private int port;
 
     private File file;
-    
+
     {
         Describe("File Tests", () -> {
         	BeforeEach(() -> {
         		RestAssured.port = port;
         	});
-        	
+
         	Context("Given a File Entity", () -> {
         		BeforeEach(() -> {
             		File f = new File();
             		f.setName("test-file");
-            		f.setMimeType("text/plain");
+            		f.setContentMimeType("text/plain");
             		f.setSummary("test file summary");
             		file = fileRepo.save(f);
         		});
-        		
+
         		It("should be able to associate content with the Entity", () -> {
         			Long fid = file.getId();
 
@@ -58,17 +58,17 @@ public class GettingStartedTest {
         		        .put("/files/" + fid)
         		    .then()
         		    	.statusCode(HttpStatus.SC_OK);
-                	    	
+
         	    	Optional<File> file = fileRepo.findById(fid);
         	    	assertThat(IOUtils.toString(fileContentStore.getContent(file.get())), is("This is plain text content!"));
         		});
-        		
+
         		Context("with existing content", () -> {
         			BeforeEach(() -> {
         				fileContentStore.setContent(file, new ByteArrayInputStream("Existing content".getBytes()));
         				fileRepo.save(file);
         			});
-        			
+
         			It("should return the content", () -> {
         		    	given()
         		    		.header("accept", "text/plain")

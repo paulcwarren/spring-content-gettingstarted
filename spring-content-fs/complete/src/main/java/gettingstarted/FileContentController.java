@@ -20,14 +20,14 @@ public class FileContentController {
 
 	@Autowired private FileRepository filesRepo;
 	@Autowired private FileContentStore contentStore;
-	
+
 	@RequestMapping(value="/files/{fileId}", method = RequestMethod.PUT)
-	public ResponseEntity<?> setContent(@PathVariable("fileId") Long id, @RequestParam("file") MultipartFile file) 
+	public ResponseEntity<?> setContent(@PathVariable("fileId") Long id, @RequestParam("file") MultipartFile file)
 			throws IOException {
 
 		Optional<File> f = filesRepo.findById(id);
 		if (f.isPresent()) {
-			f.get().setMimeType(file.getContentType());
+			f.get().setContentMimeType(file.getContentType());
 
 			contentStore.setContent(f.get(), file.getInputStream());
 
@@ -47,7 +47,7 @@ public class FileContentController {
 			InputStreamResource inputStreamResource = new InputStreamResource(contentStore.getContent(f.get()));
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentLength(f.get().getContentLength());
-			headers.set("Content-Type", f.get().getMimeType());
+			headers.set("Content-Type", f.get().getContentMimeType());
 			return new ResponseEntity<Object>(inputStreamResource, headers, HttpStatus.OK);
 		}
 		return null;
