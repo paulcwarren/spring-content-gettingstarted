@@ -45,12 +45,12 @@ public class GettingStartedTest {
         	Context("given a File Entity with content", () -> {
         		BeforeEach(() -> {
         			file1 = new File();
-					file1.setMimeType("text/plain");
+					file1.setContentMimeType("text/plain");
 					file1 = fileContentStore.setContent(file1, new ByteArrayInputStream("Hello Spring World!".getBytes()));
 					file1 = fileRepo.save(file1);
 
             		file2 = new File();
-            		file2.setMimeType("text/plain");
+            		file2.setContentMimeType("text/plain");
             		file2 = fileContentStore.setContent(file2, new ByteArrayInputStream("Hello Spring Content World!".getBytes()));
 					file2 = fileRepo.save(file2);
         		});
