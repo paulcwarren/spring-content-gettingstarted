@@ -40,7 +40,7 @@ public class GettingStartedTest {
             Context("given a file", () -> {
                 BeforeEach(() -> {
                     file = new File();
-                    file.setMimeType("text/plain");
+                    file.setContentMimeType("text/plain");
                     file.setSummary("test file summary");
                     file = fileRepo.save(file);
                 });

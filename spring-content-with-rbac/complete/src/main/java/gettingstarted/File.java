@@ -30,5 +30,5 @@ public class File {
 
 	@ContentId private String contentId;
 	@ContentLength private long contentLength;
-	@MimeType private String mimeType = "text/plain";
+	@MimeType private String contentMimeType = "text/plain";
 }
