@@ -34,7 +34,7 @@ public class Document extends BaseObject {
 	private Long contentLen;
 
 	@MimeType
-	private String mimeType;
+	private String contentMimeType;
 
 	@LockOwner
 	private String lockOwner;
