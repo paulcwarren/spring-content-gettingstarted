@@ -1,6 +1,7 @@
 package gettingstarted;
 
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,4 +32,8 @@ public class File {
 	@ContentId private String contentId;
 	@ContentLength private long contentLength;
 	@MimeType private String contentMimeType;
+
+	@ContentId private UUID renditionId;
+	@ContentLength private Long renditionLen;
+	@MimeType private String renditionMimeType;
 }
