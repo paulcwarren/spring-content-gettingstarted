@@ -3,6 +3,7 @@ package gettingstarted;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.content.commons.property.PropertyPath;
 import org.springframework.content.commons.renditions.RenditionService;
 import org.springframework.content.commons.repository.events.AfterSetContentEvent;
 import org.springframework.content.commons.repository.events.BeforeUnsetContentEvent;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.WritableResource;
 
 @StoreEventHandler
@@ -36,13 +38,18 @@ public class StoredRenditionsEventHandler {
 
         long renderedLength = 0;
 
-
-
         try (InputStream originalInputStream = store.getContent(entity, PropertyPath.from("content"))) {
 
             InputStream renderedContent = renditionService.convert("text/plain", originalInputStream, "image/jpeg");
 
-            try (OutputStream renditionPropertyStream = ((WritableResource)store.getResource(entity, PropertyPath.from("rendition"))).getOutputStream()) {
+            Resource renditionResource = store.getResource(entity, PropertyPath.from("rendition"));
+            if (renditionResource == null) {
+                String newId = UUID.randomUUID().toString();
+                renditionResource = store.getResource(newId);
+                store.associate(entity, PropertyPath.from("rendition"), newId);
+            }
+
+            try (OutputStream renditionPropertyStream = ((WritableResource)renditionResource).getOutputStream()) {
                 renderedLength = IOUtils.copyLarge(
                         renderedContent,
                         renditionPropertyStream);
