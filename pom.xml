@@ -16,6 +16,7 @@
 		<module>./spring-content-with-renditions/complete</module>
 		<module>./spring-content-with-versions/complete</module>
 		<module>./spring-content-with-cmis/complete</module>
+		<module>./spring-content-with-encryption/complete</module>
 	</modules>
 
 </project>
