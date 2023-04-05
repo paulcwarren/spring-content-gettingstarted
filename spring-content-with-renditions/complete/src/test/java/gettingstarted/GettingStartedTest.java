@@ -4,23 +4,25 @@ import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.BeforeEach;
 import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.Context;
 import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.Describe;
 import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.It;
-import static com.jayway.restassured.RestAssured.given;
-import static com.jayway.restassured.config.EncoderConfig.encoderConfig;
+import static io.restassured.config.EncoderConfig.encoderConfig;
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.config;
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 
 import java.io.ByteArrayInputStream;
 
+import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.github.paulcwarren.ginkgo4j.Ginkgo4jSpringRunner;
-import com.jayway.restassured.RestAssured;
+import org.springframework.web.context.WebApplicationContext;
+
 
 @RunWith(Ginkgo4jSpringRunner.class)
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -29,14 +31,15 @@ public class GettingStartedTest {
 	@Autowired private FileRepository fileRepo;
 	@Autowired private FileContentStore fileContentStore;
 
-    @Value("${local.server.port}") private int port;
+	@Autowired
+	private WebApplicationContext context;
 
     private File file1;
 
     {
         Describe("Rendition Tests", () -> {
         	BeforeEach(() -> {
-        		RestAssured.port = port;
+				RestAssuredMockMvc.webAppContextSetup(context);
         	});
 
         	Context("given a File Entity with content", () -> {
@@ -49,7 +52,7 @@ public class GettingStartedTest {
 
         		It("should be renderable", () -> {
 					given()
-						.config(RestAssured.config()
+						.config(config()
 								.encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false)))
 						.header("accept", "image/jpeg")
 						.get("/files/" + file1.getId() + "/content")

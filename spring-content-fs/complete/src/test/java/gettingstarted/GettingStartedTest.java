@@ -1,27 +1,24 @@
 package gettingstarted;
 
-import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.BeforeEach;
-import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.Context;
-import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.Describe;
-import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.It;
-import static com.jayway.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-import java.io.ByteArrayInputStream;
-import java.util.Optional;
-
+import com.github.paulcwarren.ginkgo4j.Ginkgo4jSpringRunner;
+import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpStatus;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.web.context.WebApplicationContext;
 
-import com.github.paulcwarren.ginkgo4j.Ginkgo4jSpringRunner;
-import com.jayway.restassured.RestAssured;
+import java.io.ByteArrayInputStream;
+import java.util.Optional;
+
+import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.*;
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(Ginkgo4jSpringRunner.class)
 @SpringBootTest(webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -30,15 +27,19 @@ public class GettingStartedTest {
 	@Autowired private FileRepository fileRepo;
 	@Autowired private FileContentStore fileContentStore;
 
-    @Value("${local.server.port}") private int port;
+	@Autowired
+	private WebApplicationContext context;
 
-    private File file;
+	@LocalServerPort
+	int port;
+
+	private File file;
 
     {
         Describe("File Tests", () -> {
         	BeforeEach(() -> {
-        		RestAssured.port = port;
-        	});
+				RestAssuredMockMvc.webAppContextSetup(context);
+			});
 
         	Context("Given a File Entity", () -> {
         		BeforeEach(() -> {

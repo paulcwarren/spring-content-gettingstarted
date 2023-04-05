@@ -1,29 +1,24 @@
 package gettingstarted;
 
-import static com.github.grantwest.eventually.EventuallyLambdaMatcher.eventuallyEval;
-import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.BeforeEach;
-import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.Context;
-import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.Describe;
-import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.It;
-import static com.jayway.restassured.RestAssured.given;
-import static com.jayway.restassured.config.EncoderConfig.encoderConfig;
-import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.MatcherAssert.assertThat;
-
-import java.io.ByteArrayInputStream;
-import java.time.Duration;
-
+import com.github.paulcwarren.ginkgo4j.Ginkgo4jSpringRunner;
+import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.context.WebApplicationContext;
 
-import com.github.paulcwarren.ginkgo4j.Ginkgo4jSpringRunner;
-import com.jayway.restassured.RestAssured;
+import java.io.ByteArrayInputStream;
+import java.time.Duration;
+
+import static com.github.grantwest.eventually.EventuallyLambdaMatcher.eventuallyEval;
+import static com.github.paulcwarren.ginkgo4j.Ginkgo4jDSL.*;
+import static io.restassured.config.EncoderConfig.encoderConfig;
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.config;
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(Ginkgo4jSpringRunner.class)
 @SpringBootTest(classes= {SpringContentApplication.class, TestConfig.class}, webEnvironment=SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -32,14 +27,15 @@ public class GettingStartedTest {
 	@Autowired private FileRepository fileRepo;
 	@Autowired private FileContentStore fileContentStore;
 
-    @Value("${local.server.port}") private int port;
+	@Autowired
+	private WebApplicationContext context;
 
     private File file1, file2;
 
     {
         Describe("Fulltext Tests", () -> {
         	BeforeEach(() -> {
-        		RestAssured.port = port;
+				RestAssuredMockMvc.webAppContextSetup(context);
         	});
 
         	Context("given a File Entity with content", () -> {
@@ -59,7 +55,7 @@ public class GettingStartedTest {
 
                     assertThat(() -> {
                         return given()
-                                .config(RestAssured.config()
+                                .config(config()
                                 .encoderConfig(encoderConfig().appendDefaultContentCharsetToContentTypeIfUndefined(false)))
                                 .header("accept", "application/hal+json")
                             .get("/files/searchContent?queryString=Content")
