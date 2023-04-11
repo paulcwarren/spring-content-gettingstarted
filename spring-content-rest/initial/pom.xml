@@ -4,16 +4,23 @@
 	<artifactId>spring-content-with-rest</artifactId>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.2</version>
+		<groupId>com.github.paulcwarren</groupId>
+		<artifactId>gettingstarted-spring-content</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../../pom.xml</relativePath>
 	</parent>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>17</java.version>
-		<ginkgo-version>1.0.15</ginkgo-version>
-	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-parent</artifactId>
+				<version>3.0.2</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
@@ -35,12 +42,7 @@
 		<dependency>
 			<groupId>com.github.paulcwarren</groupId>
 			<artifactId>spring-content-fs-boot-starter</artifactId>
-			<version>3.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.github.paulcwarren</groupId>
-			<artifactId>spring-content-rest-boot-starter</artifactId>
-			<version>3.0.1</version>
+			<version>${spring.content.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -63,12 +65,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!--		<dependency>-->
-		<!--			<groupId>com.jayway.restassured</groupId>-->
-		<!--			<artifactId>rest-assured</artifactId>-->
-		<!--			<version>2.9.0</version>-->
-		<!--			<scope>test</scope>-->
-		<!--		</dependency>-->
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>spring-mock-mvc</artifactId>
@@ -77,7 +73,7 @@
 		<dependency>
 			<groupId>com.github.paulcwarren</groupId>
 			<artifactId>ginkgo4j</artifactId>
-			<version>${ginkgo-version}</version>
+			<version>${ginkgo.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -8,6 +8,14 @@
 
 	<packaging>pom</packaging>
 
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring.content.version>3.0.1</spring.content.version>
+		<ginkgo.version>1.0.15</ginkgo.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+	</properties>
+
 	<modules>
   		<module>./spring-content-fs/complete</module>
 		<module>./spring-content-rest/complete</module>
@@ -17,5 +25,19 @@
 		<module>./spring-content-with-versions/complete</module>
 		<module>./spring-content-with-encryption/complete</module>
 	</modules>
+
+	<profiles>
+		<profile>
+			<id>defined</id>
+			<activation>
+				<property>
+					<name>env.SPRING_CONTENT_VERSION</name>
+				</property>
+			</activation>
+			<properties>
+				<spring.content.version>${env.SPRING_CONTENT_VERSION}</spring.content.version>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>

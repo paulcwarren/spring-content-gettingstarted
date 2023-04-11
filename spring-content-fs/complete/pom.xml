@@ -7,16 +7,23 @@
 	<packaging>jar</packaging>
 
  	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.5</version>
+		<groupId>com.github.paulcwarren</groupId>
+		<artifactId>gettingstarted-spring-content</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../../pom.xml</relativePath>
 	</parent>
- 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>17</java.version>
-		<ginkgo-version>1.0.14</ginkgo-version>
-	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-parent</artifactId>
+				<version>3.0.5</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
@@ -38,7 +45,7 @@
 		<dependency>
 			<groupId>com.github.paulcwarren</groupId>
 			<artifactId>spring-content-fs-boot-starter</artifactId>
-			<version>3.0.1</version>
+			<version>${spring.content.version}</version>
 		</dependency>
 		<dependency>
 		  <groupId>org.projectlombok</groupId>
@@ -69,7 +76,7 @@
 		<dependency>
 			<groupId>com.github.paulcwarren</groupId>
 			<artifactId>ginkgo4j</artifactId>
-			<version>${ginkgo-version}</version>
+			<version>${ginkgo.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

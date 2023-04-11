@@ -1,19 +1,26 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+  	<modelVersion>4.0.0</modelVersion>
   
-  <artifactId>spring-content-with-encryption</artifactId>
-  
- 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.5</version>
+  	<artifactId>spring-content-with-encryption</artifactId>
+
+	<parent>
+		<groupId>com.github.paulcwarren</groupId>
+		<artifactId>gettingstarted-spring-content</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../../pom.xml</relativePath>
 	</parent>
- 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>17</java.version>
-		<ginkgo-version>1.0.15</ginkgo-version>
-	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-parent</artifactId>
+				<version>3.0.5</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
@@ -35,12 +42,12 @@
 		<dependency>
 			<groupId>com.github.paulcwarren</groupId>
 			<artifactId>spring-content-fs-boot-starter</artifactId>
-			<version>3.0.1</version>
+			<version>${spring.content.version}</version>
 		</dependency>
  		<dependency>
 			<groupId>com.github.paulcwarren</groupId>
 			<artifactId>spring-content-rest-boot-starter</artifactId>
-			<version>3.0.1</version>
+			<version>${spring.content.version}</version>
 		</dependency>
         <dependency>
           <groupId>org.projectlombok</groupId>
@@ -49,7 +56,7 @@
 		<dependency>
 			<groupId>com.github.paulcwarren</groupId>
 			<artifactId>spring-content-encryption</artifactId>
-			<version>3.0.1</version>
+			<version>${spring.content.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.testcontainers</groupId>
@@ -81,7 +88,7 @@
 		<dependency>
 			<groupId>com.github.paulcwarren</groupId>
 			<artifactId>ginkgo4j</artifactId>
-			<version>${ginkgo-version}</version>
+			<version>${ginkgo.version}</version>
 			<scope>test</scope>
 		</dependency>	
  	</dependencies>
