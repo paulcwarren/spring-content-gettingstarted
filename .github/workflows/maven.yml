@@ -3,6 +3,7 @@ name: Branch Build
 on:
   push:
     branches: [ main ]
+    workflow_dispatch:
 jobs:
 
   build:
@@ -87,3 +88,4 @@ jobs:
         AWS_SECRET_KEY: ${{secrets.AWS_SECRET_KEY}}
         GCP_STORAGE_BUCKET: ${{secrets.GCP_STORAGE_BUCKET}}
         GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+        SPRING_CONTENT_VERSION: ${{ secrets.SPRING_CONTENT_VERSION }} 
