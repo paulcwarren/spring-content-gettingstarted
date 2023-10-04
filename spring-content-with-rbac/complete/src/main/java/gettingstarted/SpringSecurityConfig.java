@@ -43,6 +43,7 @@ public class SpringSecurityConfig /*extends WebSecurityConfigurerAdapter*/ {
 				.authorizeRequests()
 				.requestMatchers(new AntPathRequestMatcher("/files/**/content","GET")).hasRole("READER")
 				.requestMatchers(new AntPathRequestMatcher("/files/**/content","PUT")).hasRole("AUTHOR")
+				.requestMatchers(new AntPathRequestMatcher("/files/**/content","DELETE")).hasRole("AUTHOR")
 				.anyRequest().permitAll()
 				.and().httpBasic()
 				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
