@@ -10,7 +10,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.content.version>3.0.2</spring.content.version>
+		<spring.content.version>3.0.7</spring.content.version>
 		<ginkgo.version>1.0.15</ginkgo.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
