@@ -1,4 +1,4 @@
-name: Branch Build
+name: Main Build
 
 on:
   push:
@@ -21,6 +21,4 @@ jobs:
         gpg-passphrase: MAVEN_GPG_PASSPHRASE    
     - name: Validate against Getting Started Guides
       run: |
-        pushd spring-content-gettingstarted
-          SPRING_CONTENT_VERSION=3.0.12 AWS_REGION=us-west-1 mvn -B clean install
-        popd
+        SPRING_CONTENT_VERSION=3.0.12 AWS_REGION=us-west-1 mvn -B clean install
