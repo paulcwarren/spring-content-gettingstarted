@@ -82,6 +82,7 @@ public class GettingStartedTest {
 
 			It("should remove the file", () -> {
 			   given()
+				.header("accept", "application/hal+json")
 			   .when()
 			   .delete("files/" + file.getId())
 			   .then()
