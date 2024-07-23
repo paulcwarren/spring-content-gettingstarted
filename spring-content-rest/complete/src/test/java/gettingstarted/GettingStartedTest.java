@@ -88,9 +88,7 @@ public class GettingStartedTest {
 			   .then()
 			   .statusCode(HttpStatus.SC_OK); // => return 204 that is not the same return code than by starting the application
 
-
-			It("should not found the file", () -> {
-			  given()
+			   given()
 				.header("accept", "application/hal+json")
 			  .when()
 			  .get("files/" + file.getId())
