@@ -21,4 +21,4 @@ jobs:
         gpg-passphrase: MAVEN_GPG_PASSPHRASE    
     - name: Validate against Getting Started Guides
       run: |
-        SPRING_CONTENT_VERSION=3.0.12 AWS_REGION=us-west-1 mvn -B clean install
+        AWS_REGION=us-west-1 mvn -B clean install
