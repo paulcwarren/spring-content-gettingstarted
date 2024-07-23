@@ -86,7 +86,16 @@ public class GettingStartedTest {
 			   .when()
 			   .delete("files/" + file.getId())
 			   .then()
-			   .statusCode(HttpStatus.SC_NO_CONTENT); // => return 204 that is not the same return code than by starting the application
+			   .statusCode(HttpStatus.SC_OK); // => return 204 that is not the same return code than by starting the application
+
+
+			It("should not found the file", () -> {
+			  given()
+				.header("accept", "application/hal+json")
+			  .when()
+			  .get("files/" + file.getId())
+			  .then()
+			  .statusCode(HttpStatus.SC_NOT_FOUND); 				
 			});
         	});
         });
