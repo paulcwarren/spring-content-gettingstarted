@@ -79,6 +79,14 @@ public class GettingStartedTest {
 	        	    			.body(Matchers.equalTo("Existing content"));
         			});
         		});
+
+			It("should remove the file", () -> {
+			   given()
+			   .when()
+			   .delete("files/" + file.getId())
+			   .then()
+			   .statusCode(HttpStatus.SC_NO_CONTENT); // => return 204 that is not the same return code than by starting the application
+			});
         	});
         });
     }
