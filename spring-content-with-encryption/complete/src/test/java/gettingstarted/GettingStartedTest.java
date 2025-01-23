@@ -9,9 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.content.encryption.EnvelopeEncryptionService;
 import org.springframework.content.fs.io.FileSystemResourceLoader;
-import org.springframework.vault.core.VaultOperations;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.FileInputStream;
@@ -34,12 +32,6 @@ public class GettingStartedTest {
 
 	@Autowired
 	private FileSystemResourceLoader storeLoader;
-
-	@Autowired
-	private EnvelopeEncryptionService encrypter;
-
-	@Autowired
-	private VaultOperations vaultOperations;
 
 	private File f;
 

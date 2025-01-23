@@ -1,10 +1,11 @@
 package gettingstarted;
 
-import internal.org.springframework.content.fragments.EncryptingContentStoreConfiguration;
-import internal.org.springframework.content.fragments.EncryptingContentStoreConfigurer;
+import java.util.List;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.content.encryption.EnvelopeEncryptionService;
+import org.springframework.content.encryption.config.EncryptingContentStoreConfiguration;
+import org.springframework.content.encryption.config.EncryptingContentStoreConfigurer;
+import org.springframework.content.encryption.keys.VaultTransitDataEncryptionKeyWrapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.vault.authentication.ClientAuthentication;
@@ -40,16 +41,14 @@ public class SpringContentApplication {
 		}
 
 		@Bean
-		public EnvelopeEncryptionService encrypter(VaultOperations vaultOperations) {
-			return new EnvelopeEncryptionService(vaultOperations);
-		}
-
-		@Bean
-		public EncryptingContentStoreConfigurer config() {
+		public EncryptingContentStoreConfigurer<FileContentStore> config(VaultOperations vaultOperations) {
 			return new EncryptingContentStoreConfigurer<FileContentStore>() {
 				@Override
 				public void configure(EncryptingContentStoreConfiguration config) {
-					config.keyring("fsfile").encryptionKeyContentProperty("key");
+					config.dataEncryptionKeyWrappers(List.of(
+									new VaultTransitDataEncryptionKeyWrapper(vaultOperations.opsForTransit(), "fsfile")
+							))
+							.encryptionKeyContentProperty("key");
 				}
 			};
 		}
